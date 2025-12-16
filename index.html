@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Крестики-нолики</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <h1>Крестики-нолики</h1>
+
+        <!-- ===== ВЫБОР СТОРОНЫ ===== -->
+        <div class="symbol-select">
+            <div class="symbol-card X" id="playX">X</div>
+            <div class="symbol-card O" id="playO">O</div>
+        </div>
+
+        <!-- ===== ТЕКУЩАЯ СЛОЖНОСТЬ ===== -->
+        <div id="currentDifficulty">
+            <div class="difficulty-select">
+                <button class="difficulty-btn active" disabled>
+                    Сложность: <span id="difficultyLabel">Средний</span>
+                </button>
+                <button class="difficulty-btn" id="changeDifficulty">
+                    Изменить
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== ВЫБОР СЛОЖНОСТИ ===== -->
+        <div id="difficultySelector" class="hidden">
+            <div class="difficulty-select">
+                <button class="difficulty-btn difficulty" data-level="0.1" data-name="Лёгкий">Лёгкий</button>
+                <button class="difficulty-btn difficulty" data-level="0.7" data-name="Средний">Средний</button>
+                <button class="difficulty-btn difficulty" data-level="1.0" data-name="Сложный">Сложный</button>
+            </div>
+        </div>
+
+        <!-- ===== СТАТУС ===== -->
+        <div id="status">Выберите сторону</div>
+
+        <!-- ===== ИГРОВОЕ ПОЛЕ ===== -->
+        <div class="board dimmed" id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+
+            <div class="win-layer"></div>
+        </div>
+
+        <!-- ===== РЕСТАРТ ===== -->
+        <button id="restart">Начать заново</button>
+
+    </div>
+
+    <!-- ===== МОДАЛКА ПОБЕДЫ ===== -->
+    <div id="resultModal" class="modal hidden">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-close="modal">✖</button>
+
+            <h2>🎉 Вы победили!!! 🎉</h2>
+            <p>За победу вам полагается приз!</p>
+
+            <div class="modal-actions">
+
+                <button type="button" id="claimPrizeBtn" class="btn-primary">
+                    Забрать приз
+                </button>
+                <button type="button" id="playAgainBtn" class="btn-secondary" onclick="location.reload()">
+                    Сыграть снова
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛКА ПРИЗА ===== -->
+    <div id="prizeModal" class="modal hidden">
+        <div class="modal-content">
+            <button type="button" class="modal-close">✖</button>
+
+            <h2>🎁 Ваш приз 🎁</h2>
+
+            <p>
+                Вы выиграли скидочный промокод<br>
+                на нашу продукцию
+            </p>
+
+            <!-- ПРОМОКОД -->
+            <div id="promoBox" style="
+            margin: 16px 0;
+            padding: 12px 18px;
+            background: #EAD8CB;
+            border-radius: 14px;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 4px;
+        ">
+                <span id="promoCode">— — — — —</span>
+            </div>
+
+            <!-- КНОПКИ -->
+            <div class="modal-actions">
+                <button type="button" id="copyPromoBtn" class="btn-primary">
+                    📋 Скопировать
+                </button>
+
+                <a href="https://goldapple.ru/offer/rules-promo" target="_blank" class="tg-btn">
+                    Перейти на сайт
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

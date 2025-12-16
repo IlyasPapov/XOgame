@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap');
+
+body {
+    font-family: "Poppins", system-ui, sans-serif;
+    font-weight: 300;
+    /* лёгкий женский стиль */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+    background: #E5DED6;
+    color: #3A2E29;
+}
+
+/* =================== ОСНОВНАЯ КАРТОЧКА =================== */
+.app {
+    background: #F5EDE6;
+    border-radius: 28px;
+    padding: 32px 36px 36px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* =================== ЗАГОЛОВОК =================== */
+h1 {
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    font-size: 45px;
+    margin-bottom: 26px;
+    color: #4D0A18;
+}
+
+/* =================== ВЫБОР СИМВОЛА =================== */
+.symbol-select {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.symbol-card {
+    flex: 1;
+    background: #EAD8CB;
+    border-radius: 18px;
+    padding: 18px 0;
+    font-size: 42px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.symbol-card.X {
+    color: #5B242A;
+}
+
+.symbol-card.O {
+    color: #091C2A;
+}
+
+/* =================== ВЫБОР СЛОЖНОСТИ =================== */
+.difficulty-select {
+    display: flex;
+    background: #EAD8CB;
+    border-radius: 16px;
+    padding: 6px;
+    gap: 6px;
+    margin-bottom: 22px;
+}
+
+.difficulty-btn {
+    flex: 1;
+    padding: 10px 0;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+.difficulty-btn.active {
+    background: #795D4C;
+    color: #fff;
+}
+
+/* =================== СТАТУС =================== */
+#status {
+    margin: 18px 0 22px;
+    padding: 12px 18px;
+    background: rgba(190, 156, 131, 0.6);
+    border-radius: 14px;
+}
+
+/* =================== ИГРОВОЕ ПОЛЕ =================== */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 14px;
+    padding: 22px;
+    background: #BE9C83;
+    border-radius: 22px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background: #F5EDE6;
+    border-radius: 18px;
+    font-size: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.cell.X {
+    color: #5B242A;
+}
+
+.cell.O {
+    color: #091C2A;
+}
+
+/* =================== КНОПКА СЫГРАТЬ СНОВА =================== */
+#restart,
+#playAgainBtn {
+    display: inline-block;
+    margin-top: 22px;
+    background: #4D0A18;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    margin: 22px auto 0;
+    padding: 10px 16px;
+    /* чуть меньше, чтобы при переносе выглядело аккуратно */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    /* позволяет тексту переноситься на две строки аккуратно */
+    text-align: center;
+    word-break: break-word;
+    /* перенос слов, если нужно */
+    max-width: 180px;
+    /* ограничиваем ширину, чтобы текст переносился */
+}
+
+#restart:hover,
+#playAgainBtn:hover {
+    background: #5B242A;
+}
+
+/* =================== СОСТОЯНИЯ =================== */
+.board.dimmed {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* =================== МОДАЛКИ =================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #F5EDE6;
+    padding: 32px 36px;
+    border-radius: 28px;
+    position: relative;
+    text-align: center;
+    /* центрируем текст */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* =================== КРЕСТИК ЗАКРЫТИЯ МОДАЛОК =================== */
+.modal .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    font-weight: 700;
+    color: #341515;
+    cursor: pointer;
+    transition: color 0.25s ease;
+    line-height: 1;
+    padding: 4px;
+}
+
+.modal .modal-close:hover {
+    color: #4D0A18;
+}
+
+/* =================== КНОПКИ В МОДАЛКАХ =================== */
+.modal-actions {
+    display: flex;
+    gap: 1px;
+    /* чуть больше пространства между кнопками */
+    margin-top: 24px;
+    justify-content: center;
+    /* центрируем все кнопки */
+    flex-wrap: wrap;
+    /* если кнопки не помещаются, переносим */
+}
+
+
+.modal-actions button {
+    flex: 1 1 140px;
+    /* одинаковая ширина, минимальная ширина 140px */
+    max-width: 180px;
+    padding: 12px 16px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    line-height: 1.2;
+    text-align: center;
+    word-break: break-word;
+    /* перенос слов для многострочного текста */
+    transition: all 0.25s ease;
+}
+
+/* Цвета кнопок */
+.btn-primary {
+    background: #C9A24D;
+    /* золотая */
+    color: #341515;
+}
+
+.btn-primary:hover {
+    background: #D6B25F;
+}
+
+.btn-secondary {
+    background: #4D0A18;
+    /* бордовая */
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background: #5B242A;
+}
+
+/* =================== КНОПКА TELEGRAM =================== */
+.tg-btn {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    text-align: center;
+    background: #8EA1AE;
+    color: #fff;
+    padding: 14px 24px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 16px;
+    width: 60%;
+    transition: all 0.25s ease;
+}
+
+.tg-btn:hover {
+    background: #5993aa;
+}
+
+/* =================== ЛИНИЯ ВЫИГРЫША =================== */
+.win-layer {
+    position: absolute;
+    inset: 22px;
+    pointer-events: none;
+}
+
+.win-line {
+    position: absolute;
+    height: 6px;
+    background: #4D0A18;
+    border-radius: 3px;
+    transform-origin: left center;
+    width: 0;
+    transition: width 0.5s ease;
+}
+
+/* =================== ПОП АНИМАЦИЯ ЯЧЕЕК =================== */
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4) translateY(-10px);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cell.X.pop,
+.cell.O.pop {
+    animation: pop 0.4s ease forwards;
+}
+
+/* =================== КОНФЕТТИ =================== */
+.confetti {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background-color: #FFC107;
+    top: 0;
+    pointer-events: none;
+    z-index: 2000;
+    border-radius: 50%;
+    animation: confetti-fall 3s linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* =================== ВАЖНО: ВСЕГДА В КОНЦЕ =================== */
+.hidden {
+    display: none !important;
+}
